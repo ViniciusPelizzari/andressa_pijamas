@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Página de Produtos</title>
+</head>
+<body>
+    <header>
+        <h1>Produtos</h1>
+        <div class="sorting-options">
+            <label for="sorting">Ordenar por:</label>
+            <select id="sorting">
+                <option value="priceLowToHigh">Preço (Menor para Maior)</option>
+                <option value="priceHighToLow">Preço (Maior para Menor)</option>
+                <option value="relevance">Relevância</option>
+            </select>
+        </div>
+    </header>
+    <main>
+        <div class="product-list" id="productList">
+            <!-- Aqui você pode listar os produtos usando HTML e adicionar classes CSS conforme necessário -->
+            <div class="product">
+                <img src="product1.jpg" alt="Produto 1">
+                <h2>Produto 1</h2>
+                <p class="price">$10.00</p>
+            </div>
+            <div class="product">
+                <img src="product2.jpg" alt="Produto 2">
+                <h2>Produto 2</h2>
+                <p class="price">$15.00</p>
+            </div>
+            <div class="product">
+                <img src="product2.jpg" alt="Produto 2">
+                <h2>Produto 3</h2>
+                <p class="price">$33.00</p>
+            </div>
+            <div class="product">
+                <img src="product2.jpg" alt="Produto 2">
+                <h2>Produto 4</h2>
+                <p class="price">$8.00</p>
+            </div>
+            <div class="product">
+                <img src="product2.jpg" alt="Produto 2">
+                <h2>Produto 5</h2>
+                <p class="price">$05.00</p>
+            </div>
+            <div class="product">
+                <img src="product2.jpg" alt="Produto 2">
+                <h2>Produto 6</h2>
+                <p class="price">$45.00</p>
+            </div>
+            <div class="product">
+                <img src="product2.jpg" alt="Produto 2">
+                <h2>Produto 7</h2>
+                <p class="price">$23.00</p>
+            </div>
+            <div class="product">
+                <img src="product2.jpg" alt="Produto 2">
+                <h2>Produto 8</h2>
+                <p class="price">$85.00</p>
+            </div>
+            <div class="product">
+                <img src="product2.jpg" alt="Produto 2">
+                <h2>Produto 9</h2>
+                <p class="price">$18.00</p>
+            </div>
+            <!-- Adicione mais produtos aqui -->
+        </div>
+    </main>
+</body> <script>
+    const productList = document.getElementById("productList");
+    const sortingSelect = document.getElementById("sorting");
+
+    sortingSelect.addEventListener("change", () => {
+        const sortingValue = sortingSelect.value;
+        sortProducts(sortingValue);
+    });
+
+    function sortProducts(sortingValue) {
+        const products = Array.from(productList.getElementsByClassName("product"));
+        
+        products.sort((a, b) => {
+            const priceA = parseFloat(a.querySelector(".price").textContent.replace("$", ""));
+            const priceB = parseFloat(b.querySelector(".price").textContent.replace("$", ""));
+            
+            if (sortingValue === "priceLowToHigh") {
+                return priceA - priceB;
+            } else if (sortingValue === "priceHighToLow") {
+                return priceB - priceA;
+            } else {
+                // For now, let's assume products are equal in relevance
+                return 0;
+            }
+        });
+
+        productList.innerHTML = "";
+        products.forEach(product => productList.appendChild(product));
+    }
+</script>
+</html>
